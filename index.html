@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketX - Marketplace Moçambicano</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader-container">
+            <div class="loader"></div>
+            <p class="loader-text">MarketX</p>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content auth-modal">
+            <span class="close-modal">&times;</span>
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2 id="authTitle">Bem-vindo ao MarketX</h2>
+                    <p id="authSubtitle">Entre para começar a comprar e vender</p>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Senha</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+                    <p class="auth-switch">
+                        Não tem conta? <a href="#" id="showRegister">Cadastre-se</a>
+                    </p>
+                </form>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="registerName">Nome Completo</label>
+                        <input type="text" id="registerName" required placeholder="João Silva">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">Telefone</label>
+                        <input type="tel" id="registerPhone" required placeholder="+258 84 123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Senha</label>
+                        <input type="password" id="registerPassword" required placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Senha</label>
+                        <input type="password" id="registerConfirmPassword" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Criar Conta</button>
+                    <p class="auth-switch">
+                        Já tem conta? <a href="#" id="showLogin">Entre aqui</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content product-modal">
+            <span class="close-modal">&times;</span>
+            <div id="productDetail"></div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+        <div class="modal-content add-product-modal">
+            <span class="close-modal">&times;</span>
+            <h2>Adicionar Produto</h2>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="productTitle">Título do Produto</label>
+                    <input type="text" id="productTitle" required placeholder="Ex: iPhone 13 Pro Max">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productPrice">Preço</label>
+                        <input type="number" id="productPrice" required step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="productCurrency">Moeda</label>
+                        <select id="productCurrency" required>
+                            <option value="MZN">MZN - Metical</option>
+                            <option value="USD">USD - Dólar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="ZAR">ZAR - Rand</option>
+                            <option value="GBP">GBP - Libra</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="productCategory">Categoria</label>
+                    <select id="productCategory" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="electronics">Eletrônicos</option>
+                        <option value="vehicles">Veículos</option>
+                        <option value="property">Imóveis</option>
+                        <option value="fashion">Moda e Beleza</option>
+                        <option value="home">Casa e Jardim</option>
+                        <option value="sports">Esportes e Lazer</option>
+                        <option value="books">Livros e Educação</option>
+                        <option value="toys">Brinquedos e Jogos</option>
+                        <option value="services">Serviços</option>
+                        <option value="other">Outros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="productCondition">Condição</label>
+                    <select id="productCondition" required>
+                        <option value="new">Novo</option>
+                        <option value="used">Usado</option>
+                        <option value="refurbished">Recondicionado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Descrição</label>
+                    <textarea id="productDescription" required rows="4" placeholder="Descreva seu produto..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="productLocation">Localização</label>
+                    <input type="text" id="productLocation" required placeholder="Maputo, Moçambique">
+                </div>
+
+                <div class="form-group">
+                    <label>Fotos do Produto (Máximo 5)</label>
+                    <div class="image-upload-container">
+                        <input type="file" id="productImages" accept="image/*" multiple style="display: none;">
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('productImages').click()">
+                            <span>📷</span> Adicionar Fotos
+                        </button>
+                        <div id="imagePreview" class="image-preview-grid"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Publicar Produto</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>MarketX</h1>
+                <span class="brand-tagline">Moçambique</span>
+            </div>
+            
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Buscar produtos...">
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <div class="nav-actions">
+                <div id="currencySelector" class="currency-selector">
+                    <select id="globalCurrency">
+                        <option value="MZN">MZN</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="ZAR">ZAR</option>
+                        <option value="GBP">GBP</option>
+                    </select>
+                </div>
+                <button id="loginBtn" class="btn btn-outline">Entrar</button>
+                <button id="userMenuBtn" class="user-menu-btn" style="display: none;">
+                    <div class="user-avatar">
+                        <span id="userInitials">U</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- User Dropdown Menu -->
+    <div id="userDropdown" class="user-dropdown" style="display: none;">
+        <div class="dropdown-header">
+            <div class="user-avatar-large">
+                <span id="userInitialsLarge">U</span>
+            </div>
+            <div class="user-info">
+                <p class="user-name" id="userName">Usuário</p>
+                <p class="user-email" id="userEmail">usuario@email.com</p>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a href="#" id="myProductsLink" class="dropdown-item">📦 Meus Produtos</a>
+        <a href="#" id="addProductLink" class="dropdown-item">➕ Adicionar Produto</a>
+        <a href="#" id="favoritesLink" class="dropdown-item">❤️ Favoritos</a>
+        <div class="dropdown-divider"></div>
+        <a href="#" id="logoutBtn" class="dropdown-item">🚪 Sair</a>
+    </div>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="categories-scroll">
+                <div class="category-card active" data-category="all">
+                    <div class="category-icon">🏪</div>
+                    <span>Todos</span>
+                </div>
+                <div class="category-card" data-category="electronics">
+                    <div class="category-icon">📱</div>
+                    <span>Eletrônicos</span>
+                </div>
+                <div class="category-card" data-category="vehicles">
+                    <div class="category-icon">🚗</div>
+                    <span>Veículos</span>
+                </div>
+                <div class="category-card" data-category="property">
+                    <div class="category-icon">🏠</div>
+                    <span>Imóveis</span>
+                </div>
+                <div class="category-card" data-category="fashion">
+                    <div class="category-icon">👗</div>
+                    <span>Moda</span>
+                </div>
+                <div class="category-card" data-category="home">
+                    <div class="category-icon">🛋️</div>
+                    <span>Casa</span>
+                </div>
+                <div class="category-card" data-category="sports">
+                    <div class="category-icon">⚽</div>
+                    <span>Esportes</span>
+                </div>
+                <div class="category-card" data-category="books">
+                    <div class="category-icon">📚</div>
+                    <span>Livros</span>
+                </div>
+                <div class="category-card" data-category="toys">
+                    <div class="category-icon">🎮</div>
+                    <span>Jogos</span>
+                </div>
+                <div class="category-card" data-category="services">
+                    <div class="category-icon">🔧</div>
+                    <span>Serviços</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>Ordenar por:</label>
+                    <select id="sortFilter">
+                        <option value="recent">Mais Recentes</option>
+                        <option value="price-low">Menor Preço</option>
+                        <option value="price-high">Maior Preço</option>
+                        <option value="rating">Melhor Avaliação</option>
+                    </select>
+                </div>
+                <div class="active-filters" id="activeFilters"></div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="productsGrid" class="products-grid">
+                <div class="loading-products">
+                    <div class="loader-small"></div>
+                    <p>Carregando produtos...</p>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div class="empty-icon">🔍</div>
+                <h3>Nenhum produto encontrado</h3>
+                <p>Tente ajustar seus filtros ou busca</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MarketX</h3>
+                    <p>O melhor marketplace de Moçambique</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Sobre</h4>
+                    <a href="#">Quem Somos</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Privacidade</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <a href="#">Central de Ajuda</a>
+                    <a href="#">Contato</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Conecte-se</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MarketX. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
